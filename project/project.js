@@ -27,13 +27,13 @@ dhtmlxEvent(window,"load",function(){
   });
   gProjects = siProject.attachGrid({parent:"pTimes"});
   gProjects.setImagePath("codebase/imgs/");
-  //gTimes.enableAutoWidth(true);
-  //gTimes.enableAutoHeight(true);
   gProjects.setSizes();
   gProjects.setHeader(["Nummer","Name","Status","Kategorie"]);
   gProjects.setColumnIds('ID,NAME,STATUS,CATEGORY')
   gProjects.setColTypes("txt,txt,txt,txt");
-  //gTimes.enableEditEvents(false,true,true);
+  gProjects.attachHeader("#text_filter,#text_filter,#select_filter,");
+  //gProjects.filterByAll=function(){
+  //};
   gProjects.init();
   dsProjects = newPrometDataStore('projects');
   dsProjects.DataProcessor.init(gProjects);

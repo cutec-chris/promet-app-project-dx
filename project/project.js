@@ -35,7 +35,16 @@ dhtmlxEvent(window,"load",function(){
   //gProjects.filterByAll=function(){
   //};
   gProjects.attachEvent("onFilterStart", function(indexes,values){
-    console.log("onFilterStart event fired");
+    var aFilter = '';
+    for (var i = 0; i < indexes.length; i++) {
+      if (values[i]!='')
+        aFilter += ' AND "'+gProjects.getColumnId(indexes[i])+'"'+' like \'%'+values[i]+'%\'';
+    }
+    aFilter = aFilter.substring(5,aFilter.length);
+    siProject.progressOn();
+    dsProjects.FillGrid(gProjects,aFilter,0,function (){
+      siProject.progressOff();
+    });
     return false;
   });
   gProjects.init();

@@ -34,6 +34,10 @@ dhtmlxEvent(window,"load",function(){
   gProjects.attachHeader("#text_filter,#text_filter,#select_filter,");
   //gProjects.filterByAll=function(){
   //};
+  gProjects.attachEvent("onFilterStart", function(indexes,values){
+    console.log("onFilterStart event fired");
+    return false;
+  });
   gProjects.init();
   dsProjects = newPrometDataStore('projects');
   dsProjects.DataProcessor.init(gProjects);

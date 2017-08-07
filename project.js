@@ -2,8 +2,10 @@ function RefreshProjects() {
   siProject.progressOn();
   try {
     console.log("Refresh Times");
-    dsProjects.FillGrid(gProjects,'');
-  } finally {
+    dsProjects.FillGrid(gProjects,'',0,function (){
+      siProject.progressOff();
+    });
+  } catch(err) {
     siProject.progressOff();
   }
 }

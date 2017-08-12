@@ -6,6 +6,7 @@ function RefreshProjects() {
       siProject.progressOff();
     });
   } catch(err) {
+    console.log('Refresh Exception:'+err.message);
     siProject.progressOff();
   }
 }

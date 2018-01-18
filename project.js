@@ -1,5 +1,5 @@
 var Projects;
-dhtmlxEvent(window,"load",function(){
+window.addEventListener('AfterLogin',function(){
   Projects = newPrometList('projects','Projekte');
   Projects.Grid.setHeader(["Name","Nummer","Status","Kategorie"]);
   Projects.Grid.setColumnIds('NAME,ID,STATUS,CATEGORY')

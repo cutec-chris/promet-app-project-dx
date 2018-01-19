@@ -43,3 +43,10 @@ window.addEventListener('AfterLogin',function(){
       }});
   }
 });
+window.addEventListener('AfterLogout',function(){
+  Projects.Grid.destructor();
+  Projects.Page.remove();
+  delete Projects;
+  Projects = {};
+  Projects = null;
+});

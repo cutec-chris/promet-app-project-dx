@@ -27,10 +27,42 @@ window.addEventListener('AfterLogin',function(){
             newWindow.document.body.appendChild(aDiv);
             aDiv.style.height = '100%';
             aDiv.style.width = '100%';
+
+            newWindow.window.gantt.templates.scale_cell_class = function(date){
+                if(date.getDay()==0||date.getDay()==6){
+                    return "weekend";
+                }
+            };
+            newWindow.window.gantt.templates.task_cell_class = function(item,date){
+                if(date.getDay()==0||date.getDay()==6){
+                    return "weekend" ;
+                }
+            };
             newWindow.window.gantt.config.xml_date="%Y-%m-%d %H:%i";
-            newWindow.window.gantt.config.scale_unit = "month";
-            newWindow.window.gantt.config.date_scale = "%F, %Y";
+            newWindow.window.gantt.config.scale_unit= "week";
             newWindow.window.gantt.init(aDiv);
+
+            newWindow.window.gantt.config.task_height = 16;
+          	newWindow.window.gantt.config.row_height = 30;
+          	newWindow.window.gantt.locale.labels.baseline_enable_button = 'Set';
+          	newWindow.window.gantt.locale.labels.baseline_disable_button = 'Remove';
+
+          	newWindow.window.gantt.config.lightbox.sections = [
+            		{name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+            		{name: "time", map_to: "auto", type: "duration"},
+            		{name: "baseline", map_to: { start_date: "planned_start", end_date: "planned_end"}, button: true, type: "duration_optional"}
+            	];
+          	newWindow.window.gantt.config.lightbox.project_sections = [
+            		{name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+            		{name: "time", map_to: "auto", type: "duration", readonly: true},
+            		{name: "baseline", map_to: { start_date: "planned_start", end_date: "planned_end"}, button: true, type: "duration_optional"}
+            	];
+          	newWindow.window.gantt.config.lightbox.milestone_sections = [
+            		{name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+            		{name: "time", map_to: "auto", type: "duration", single_date:true},
+            		{name: "baseline", single_date:true,map_to: { start_date: "planned_start", end_date: "planned_end"}, button: true, type: "duration_optional"}
+            	];
+          	newWindow.window.gantt.locale.labels.section_baseline = "Planned";
 
             for (var i = 0; i < aForm.Data.TASKS.length; i++) {
               var aObj = {};

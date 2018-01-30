@@ -20,7 +20,7 @@ window.addEventListener('AfterLogin',function(){
             newPath += "/";
             newPath += pathArray[i];
           }
-          newWindow.location.href=window.location.protocol + "//" + window.location.host + newPath+'gantt.html';
+          newWindow.location.href=window.location.protocol + "//" + window.location.host + newPath+'project/gantt.html';
           newWindow.onload = function () {
             newWindow.Form = aForm;
             var aDiv = newWindow.document.createElement('div');

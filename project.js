@@ -11,34 +11,76 @@ window.addEventListener('AfterLogin',function(){
     aForm.Toolbar.addButton('gantt', 3, 'Gantt', 'fa fa-bar-chart fa-rotate-90');
     aForm.Toolbar.attachEvent("onClick", function(id) {
       if (id=='gantt') {
-        var aDiv = document.createElement('div');
-        aForm.Parent.appendChild(aDiv);
-        aForm.Tabs.tabs("plan").attachObject(aDiv);
-        aDiv.style.height = '100%';
-        aDiv.style.width = '100%';
-        aForm.OnDataUpdated = function(bForm) {
-          gantt.config.xml_date="%Y-%m-%d %H:%i";
-          gantt.init(aDiv);
-          for (var i = 0; i < bForm.Data.TASKS.length; i++) {
-            var aObj = {};
-            if (bForm.Data.TASKS[i].Fields.active != 0) {
-              aObj.id = bForm.Data.TASKS[i].Fields.sql_id;
-              aObj.text = bForm.Data.TASKS[i].Fields.summary;
-              if (bForm.Data.TASKS[i].Fields.startdate) {
-                var aDate = new Date(bForm.Data.TASKS[i].Fields.startdate);
-                aObj.start_date = formatDate(aDate,"YYYY-MM-dd");
-              } else {
-                var aDate = new Date();
-                aObj.start_date = formatDate(aDate,"YYYY-MM-dd");
+        var newWindow=window.open('','_blank');
+        if (newWindow!=null) { //no rights to open an new window (possibly were running from file:// so we use an dhtmlx window)
+          parent.RegisterWindow(newWindow);
+          var newPath = '';
+          var pathArray = window.location.pathname.split( '/' );
+          for (i = 0; i < pathArray.length-1; i++) {
+            newPath += "/";
+            newPath += pathArray[i];
+          }
+          newWindow.location.href=window.location.protocol + "//" + window.location.host + newPath+'gantt.html';
+          newWindow.onload = function () {
+            newWindow.Form = aForm;
+            var aDiv = newWindow.document.createElement('div');
+            newWindow.document.body.appendChild(aDiv);
+            aDiv.style.height = '100%';
+            aDiv.style.width = '100%';
+            newWindow.window.gantt.config.xml_date="%Y-%m-%d %H:%i";
+            newWindow.window.gantt.config.scale_unit = "month";
+            newWindow.window.gantt.config.date_scale = "%F, %Y";
+            newWindow.window.gantt.init(aDiv);
+
+            for (var i = 0; i < aForm.Data.TASKS.length; i++) {
+              var aObj = {};
+              if (aForm.Data.TASKS[i].Fields.active != 0) {
+                aObj.id = aForm.Data.TASKS[i].Fields.sql_id;
+                aObj.text = aForm.Data.TASKS[i].Fields.summary;
+                if (aForm.Data.TASKS[i].Fields.startdate) {
+                  var aDate = new Date(aForm.Data.TASKS[i].Fields.startdate);
+                  aObj.start_date = formatDate(aDate,"YYYY-MM-dd");
+                } else {
+                  var aDate = new Date();
+                  aObj.start_date = formatDate(aDate,"YYYY-MM-dd");
+                }
+                if (aForm.Data.TASKS[i].Fields.plantime>0)
+                  aObj.duration = aForm.Data.TASKS[i].Fields.plantime * 8;
+                if ((aForm.Data.TASKS[i].Fields.parent)&&(aForm.Data.TASKS[i].Fields.parent!="0"))
+                  aObj.parent = parseInt(aForm.Data.TASKS[i].Fields.parent);
+                newWindow.window.gantt.addTask(aObj);
               }
-              if (bForm.Data.TASKS[i].Fields.plantime>0)
-                aObj.duration = bForm.Data.TASKS[i].Fields.plantime * 8;
-              if ((bForm.Data.TASKS[i].Fields.parent)&&(bForm.Data.TASKS[i].Fields.parent!="0"))
-                aObj.parent = parseInt(bForm.Data.TASKS[i].Fields.parent);
-              gantt.addTask(aObj);
+            }
+            for (var i = 0; i < aForm.Data.TASKS.length; i++) {
+              var aObj = {};
+              var aLink = {};
+              if (aForm.Data.TASKS[i].Fields.active != 0) {
+                aObj.id = aForm.Data.TASKS[i].Fields.sql_id;
+                aObj.text = aForm.Data.TASKS[i].Fields.summary;
+                if (aForm.Data.TASKS[i].Fields.startdate) {
+                  var aDate = new Date(aForm.Data.TASKS[i].Fields.startdate);
+                  aObj.start_date = formatDate(aDate,"YYYY-MM-dd");
+                } else {
+                  var aDate = new Date();
+                  aObj.start_date = formatDate(aDate,"YYYY-MM-dd");
+                }
+                if (aForm.Data.TASKS[i].Fields.plantime>0)
+                  aObj.duration = aForm.Data.TASKS[i].Fields.plantime * 8;
+                if ((aForm.Data.TASKS[i].Fields.parent)&&(aForm.Data.TASKS[i].Fields.parent!="0"))
+                  aObj.parent = parseInt(aForm.Data.TASKS[i].Fields.parent);
+                newWindow.window.gantt.addTask(aObj);
+                if (aForm.Data.TASKS[i].DEPENDENCIES) {
+                  for (var a = 0; a < aForm.Data.TASKS[i].DEPENDENCIES.length; a++) {
+                    aLink.id = aForm.Data.TASKS[i].DEPENDENCIES[a].Fields.sql_id;
+                    aLink.source = aForm.Data.TASKS[i].DEPENDENCIES[a].Fields.ref_id_id;
+                    aLink.target = aForm.Data.TASKS[i].Fields.sql_id;
+                    aLink.type = newWindow.window.gantt.config.links.finish_to_start;
+                    newWindow.window.gantt.addLink(aLink);
+                  }
+                }
+              }
             }
           }
-          //gantt.parse(tasks);
         }
       }});
   }

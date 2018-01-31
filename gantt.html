@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.dhtmlx.com/edge/dhtmlx.css">
     <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.dhtmlx.com/gantt/edge/skins/dhtmlxgantt_meadow.css" type="text/css" media="screen"
+		  title="no title" charset="utf-8">
     <style>
         html, body {
             width: 100%;
@@ -21,7 +23,21 @@
             background-color: #EBEBEB;
         }
         .weekend{ background: #f4f7f4 !important;}
-  </style>
+
+        .baseline {
+		position: absolute;
+		border-radius: 2px;
+		opacity: 0.6;
+		margin-top: -7px;
+		height: 12px;
+		background: #ffd180;
+		border: 1px solid rgb(255, 153, 0);
+	}
+
+        .gantt_task_content {
+          font-size: 9px;
+        }
+    </style>
   </head>
   <body>
   </body>

@@ -43,7 +43,7 @@ window.addEventListener('AfterLogin',function(){
             newWindow.window.gantt.init(aDiv);
 
             newWindow.window.gantt.config.task_height = 16;
-          	newWindow.window.gantt.config.row_height = 30;
+          	newWindow.window.gantt.config.row_height = 20;
           	newWindow.window.gantt.locale.labels.baseline_enable_button = 'Set';
           	newWindow.window.gantt.locale.labels.baseline_disable_button = 'Remove';
 

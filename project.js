@@ -38,31 +38,19 @@ window.addEventListener('AfterLogin',function(){
                     return "weekend" ;
                 }
             };
-            newWindow.window.gantt.config.xml_date="%Y-%m-%d %H:%i";
+            newWindow.window.gantt.config.date_scale = "Week #%W";
             newWindow.window.gantt.config.scale_unit= "week";
-            newWindow.window.gantt.init(aDiv);
+            newWindow.window.gantt.config.subscales = [
+            		{unit:"month", step:1, date:"%M" },
+            		{unit:"year", step:1, date:"%Y" }
+            	];
+
+            newWindow.window.gantt.config.scale_height = 3*28;
 
             newWindow.window.gantt.config.task_height = 16;
           	newWindow.window.gantt.config.row_height = 20;
-          	newWindow.window.gantt.locale.labels.baseline_enable_button = 'Set';
-          	newWindow.window.gantt.locale.labels.baseline_disable_button = 'Remove';
 
-          	newWindow.window.gantt.config.lightbox.sections = [
-            		{name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
-            		{name: "time", map_to: "auto", type: "duration"},
-            		{name: "baseline", map_to: { start_date: "planned_start", end_date: "planned_end"}, button: true, type: "duration_optional"}
-            	];
-          	newWindow.window.gantt.config.lightbox.project_sections = [
-            		{name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
-            		{name: "time", map_to: "auto", type: "duration", readonly: true},
-            		{name: "baseline", map_to: { start_date: "planned_start", end_date: "planned_end"}, button: true, type: "duration_optional"}
-            	];
-          	newWindow.window.gantt.config.lightbox.milestone_sections = [
-            		{name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
-            		{name: "time", map_to: "auto", type: "duration", single_date:true},
-            		{name: "baseline", single_date:true,map_to: { start_date: "planned_start", end_date: "planned_end"}, button: true, type: "duration_optional"}
-            	];
-          	newWindow.window.gantt.locale.labels.section_baseline = "Planned";
+            newWindow.window.gantt.init(aDiv/*,new Date(),new Date().addDays(30)*/);
 
             for (var i = 0; i < aForm.Data.TASKS.length; i++) {
               var aObj = {};

@@ -38,19 +38,34 @@ window.addEventListener('AfterLogin',function(){
                     return "weekend" ;
                 }
             };
-            newWindow.window.gantt.config.date_scale = "Week #%W";
-            newWindow.window.gantt.config.scale_unit= "week";
-            newWindow.window.gantt.config.subscales = [
-            		{unit:"month", step:1, date:"%M" },
-            		{unit:"year", step:1, date:"%Y" }
-            	];
 
+            newWindow.window.gantt.config.drag_progress = false;
+            //newWindow.window.gantt.config.date_scale = "Week #%W";
+            //newWindow.window.gantt.config.scale_unit= "week";
+            newWindow.window.gantt.config.date_scale = "%d";
+            newWindow.window.gantt.config.scale_unit= "day";
+            newWindow.window.gantt.config.step = 1;
+            newWindow.window.gantt.config.fit_tasks = true;
+            newWindow.window.gantt.config.subscales = [
+              {unit:"week", step:1, date:"KW %W" },
+             		{unit:"month", step:1, date:"%M" }
+            		//{unit:"year", step:1, date:"%Y" }
+            	];
+            newWindow.window.gantt.config.work_time = true;
+            newWindow.window.gantt.config.correct_work_time = true;
+            newWindow.window.gantt.config.columns = [
+              { name: "text", label: "Aufgabe", tree: true, width: 300 },
+              { name: "start_date", label: "Start", align: "center" },
+              { name:"duration", label: "Dauer",align: "center", width:70 },
+              { name: "add", label: "", width: 44 }
+              ];
             newWindow.window.gantt.config.scale_height = 3*28;
 
             newWindow.window.gantt.config.task_height = 16;
           	newWindow.window.gantt.config.row_height = 20;
 
-            newWindow.window.gantt.init(aDiv/*,new Date(),new Date().addDays(30)*/);
+            newWindow.window.gantt.config.xml_date="%Y-%m-%d %H:%i";
+            newWindow.window.gantt.init(aDiv,new Date().addDays(-5),new Date().addDays(90));
 
             for (var i = 0; i < aForm.Data.TASKS.length; i++) {
               var aObj = {};

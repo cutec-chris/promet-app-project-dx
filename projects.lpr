@@ -16,7 +16,7 @@ Procedure ShowProject(URl : String; aRoute : TRoute; Params: TStrings);
 var
   aForm: TAvammForm;
 begin
-  aForm := TProjectForm.Create(fmInlineWindow,'Project',Params.Values['Id']);
+  aForm := TProjectForm.Create(fmInlineWindow,'projects',Params.Values['Id']);
 end;
 Procedure ShowProjectList(URl : String; aRoute : TRoute; Params: TStrings);
 var
@@ -25,7 +25,7 @@ begin
   if Project = nil then
     begin
       aParent := TJSHTMLElement(GetAvammContainer());
-      Project := TAvammListForm.Create(aParent,'Project');
+      Project := TAvammListForm.Create(aParent,'projects');
       with Project do
         begin
           Grid.setHeader('Name,Nummer,Status,Kategorie',',',TJSArray._of([]));
@@ -39,8 +39,8 @@ begin
 end;
 
 initialization
-  if getRight('Project')>0 then
-    RegisterSidebarRoute(strProject,'Project',@ShowProjectList);
-  Router.RegisterRoute('/Project/by-id/:Id/',@ShowProject);
+  if getRight('Projects')>0 then
+    RegisterSidebarRoute(strProject,'projects',@ShowProjectList);
+  Router.RegisterRoute('/projects/by-id/:Id/',@ShowProject);
 end.
 

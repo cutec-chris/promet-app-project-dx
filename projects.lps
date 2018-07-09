@@ -9,6 +9,8 @@
         <Filename Value="projects.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
+        <TopLine Value="3"/>
+        <CursorPos X="34" Y="44"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>

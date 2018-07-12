@@ -43,7 +43,7 @@ begin
       Project := TAvammListForm.Create(aParent,'projects');
       with Project do
         begin
-          Grid.setHeader('Name,Nummer,Status,Kategorie',',',TJSArray._of([]));
+          Grid.setHeader('Name,Nummer,Status,Kategorie');
           Grid.setColumnIds('NAME,ID,STATUS,CATEGORY');
           Grid.attachHeader('#text_filter,#text_filter,#select_filter,#text_filter');
           Grid.setInitWidths('*,100,150,100,200');

@@ -168,9 +168,9 @@
     var aParent = null;
     if ($mod.Project === null) {
       aParent = rtl.getObject(pas.Avamm.GetAvammContainer());
-      $mod.Project = pas.AvammForms.TAvammListForm.$create("Create$1",[aParent,"projects","1C"]);
+      $mod.Project = pas.AvammForms.TAvammListForm.$create("Create$2",[aParent,"projects","1C"]);
       var $with1 = $mod.Project;
-      $with1.Grid.setHeader("Name,Nummer,Status,Kategorie",",",Array.of({}));
+      $with1.Grid.setHeader("Name,Nummer,Status,Kategorie");
       $with1.Grid.setColumnIds("NAME,ID,STATUS,CATEGORY");
       $with1.Grid.attachHeader("#text_filter,#text_filter,#select_filter,#text_filter");
       $with1.Grid.setInitWidths("*,100,150,100,200");

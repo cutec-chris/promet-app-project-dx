@@ -172,7 +172,7 @@
       var $with1 = $mod.Project;
       $with1.Grid.setHeader("Name,Nummer,Status,Kategorie");
       $with1.Grid.setColumnIds("NAME,ID,STATUS,CATEGORY");
-      $with1.FFilterHeader = "#text_filter,#text_filter,#select_filter,#text_filter";
+      $with1.SetFilterHeader("#text_filter,#text_filter,#select_filter,#text_filter");
       $with1.Grid.setInitWidths("*,100,150,100,200");
       $with1.Grid.init();
     };
@@ -180,7 +180,7 @@
   };
   $mod.$resourcestrings = {strProject: {org: "Projekte"}, strGantt: {org: "Gantt"}};
   $mod.$init = function () {
-    if (pas.Avamm.getRight("Projects") > 0) pas.Avamm.RegisterSidebarRoute(rtl.getResStr(pas.projects,"strProject"),"projects",$mod.ShowProjectList);
+    if (pas.Avamm.getRight("Projects") > 0) pas.Avamm.RegisterSidebarRoute(rtl.getResStr(pas.projects,"strProject"),"projects",$mod.ShowProjectList,"fa-briefcase");
     pas.webrouter.Router().RegisterRoute("\/projects\/by-id\/:Id\/",$mod.ShowProject,false);
   };
 });

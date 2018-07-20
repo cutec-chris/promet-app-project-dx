@@ -245,7 +245,7 @@ end;
 
 initialization
   if getRight('Projects')>0 then
-    RegisterSidebarRoute(strProject,'projects',@ShowProjectList);
+    RegisterSidebarRoute(strProject,'projects',@ShowProjectList,'fa-briefcase');
   Router.RegisterRoute('/projects/by-id/:Id/',@ShowProject);
 end.
 

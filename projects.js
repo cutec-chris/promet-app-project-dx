@@ -173,7 +173,7 @@
       $with1.Grid.setHeader("Name,Nummer,Status,Kategorie");
       $with1.Grid.setColumnIds("NAME,ID,STATUS,CATEGORY");
       $with1.SetFilterHeader("#text_filter,#text_filter,#select_filter,#text_filter");
-      $with1.Grid.setInitWidths("*,100,150,100,200");
+      $with1.Grid.setInitWidthsP("60,10,10,20");
       $with1.Grid.init();
     };
     $mod.Project.Show();

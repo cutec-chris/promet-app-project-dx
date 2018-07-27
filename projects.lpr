@@ -46,7 +46,7 @@ begin
           Grid.setHeader('Name,Nummer,Status,Kategorie');
           Grid.setColumnIds('NAME,ID,STATUS,CATEGORY');
           FilterHeader := '#text_filter,#text_filter,#select_filter,#text_filter';
-          Grid.setInitWidths('*,100,150,100,200');
+          Grid.setInitWidthsP('60,10,10,20');
           Grid.init();
         end;
     end;

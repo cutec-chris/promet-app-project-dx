@@ -64,7 +64,7 @@ var
   i, a: Integer;
   newWindow: TJSWindow;
 begin
-  writeln('loaded called ...');
+  console.log('loaded called ...');
   newWindow := FGanttWindow;
   aDiv := TJSHTMLElement(FGanttWindow.document.createElement('div'));
   FGanttWindow.document.body.appendChild(aDiv);
